@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Scrappy | Daily Scrap Prices</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7f5;
+      color: #222;
+    }
+
+    header {
+      background: #168c4c;
+      color: white;
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+    header h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .info-box {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .category {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: bold;
+      color: #168c4c;
+      margin: 15px 0;
+    }
+
+    .up {
+      color: green;
+    }
+
+    .down {
+      color: red;
+    }
+
+    .stable {
+      color: gray;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>♻ SCRAPPY</h1>
+  <p>Daily Scrap Market Prices</p>
+</header>
+
+<div class="container">
+
+  <div class="info-box">
+    <h2>Today's Scrap Prices</h2>
+    <br>
+    <p>📍 Location: <span id="location"></span></p>
+    <br>
+    <p>📅 Last Updated: <span id="lastUpdated"></span></p>
+  </div>
+
+  <div id="priceContainer" class="price-grid"></div>
+
+</div>
+
+<footer>
+  <p>© 2026 Scrappy Innovations. All Rights Reserved.</p>
+</footer>
+
+<script>
+
+fetch('./prices.json')
+  .then(response => response.json())
+  .then(data => {
+
+    document.getElementById('location').textContent = data.location;
+
+    document.getElementById('lastUpdated').textContent = data.lastUpdated;
+
+    const container = document.getElementById('priceContainer');
+
+    data.prices.forEach(item => {
+
+      let icon = '➖';
+
+      if (item.trend === 'up') {
+        icon = '📈';
+      } 
+      else if (item.trend === 'down') {
+        icon = '📉';
+      }
+
+      container.innerHTML += `
+        <div class="card">
+
+          <div class="category">
+            ${item.category}
+          </div>
+
+          <h3>${item.name}</h3>
+
+          <div class="price">
+            ₹${item.price}
+            <span style="font-size:14px;font-weight:normal;">
+              / ${item.unit}
+            </span>
+          </div>
+
+          <div class="${item.trend}">
+            ${icon} ${item.trend.toUpperCase()}
+          </div>
+
+        </div>
+      `;
+    });
+
+  })
+  .catch(error => {
+    console.error('Error loading prices:', error);
+  });
+
+</script>
+
+</body>
+</html>
