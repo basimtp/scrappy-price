@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-20",
+  "lastUpdated": "2026-08-21",
   "location": "Kerala, India",
   "currency": "INR",
   "prices": [
@@ -7,7 +7,7 @@
       "id": 1,
       "name": "Iron Scrap",
       "category": "Metal",
-      "price": 32,
+      "price": 35,
       "unit": "kg",
       "trend": "up"
     },
@@ -31,7 +31,7 @@
       "id": 4,
       "name": "Brass Scrap",
       "category": "Metal",
-      "price": 420,
+      "price": 423,
       "unit": "kg",
       "trend": "down"
     },
