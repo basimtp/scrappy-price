@@ -1,0 +1,71 @@
+{
+  "lastUpdated": "2026-08-20",
+  "location": "Kerala, India",
+  "currency": "INR",
+  "prices": [
+    {
+      "id": 1,
+      "name": "Iron Scrap",
+      "category": "Metal",
+      "price": 32,
+      "unit": "kg",
+      "trend": "up"
+    },
+    {
+      "id": 2,
+      "name": "Aluminium Scrap",
+      "category": "Metal",
+      "price": 145,
+      "unit": "kg",
+      "trend": "up"
+    },
+    {
+      "id": 3,
+      "name": "Copper Scrap",
+      "category": "Metal",
+      "price": 680,
+      "unit": "kg",
+      "trend": "up"
+    },
+    {
+      "id": 4,
+      "name": "Brass Scrap",
+      "category": "Metal",
+      "price": 420,
+      "unit": "kg",
+      "trend": "down"
+    },
+    {
+      "id": 5,
+      "name": "Stainless Steel",
+      "category": "Metal",
+      "price": 95,
+      "unit": "kg",
+      "trend": "stable"
+    },
+    {
+      "id": 6,
+      "name": "Newspaper",
+      "category": "Paper",
+      "price": 14,
+      "unit": "kg",
+      "trend": "stable"
+    },
+    {
+      "id": 7,
+      "name": "Cardboard",
+      "category": "Paper",
+      "price": 10,
+      "unit": "kg",
+      "trend": "stable"
+    },
+    {
+      "id": 8,
+      "name": "PET Plastic",
+      "category": "Plastic",
+      "price": 22,
+      "unit": "kg",
+      "trend": "up"
+    }
+  ]
+}
