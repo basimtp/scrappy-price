@@ -1,4 +1,5 @@
 {
+  "_note": "EDIT THIS FILE TO UPDATE PRICES. See README.md for step-by-step instructions.",
   "lastUpdated": "2026-08-21",
   "location": "Kerala, India",
   "currency": "INR",
@@ -7,65 +8,161 @@
       "id": 1,
       "name": "Iron Scrap",
       "category": "Metal",
-      "price": 35,
       "unit": "kg",
-      "trend": "up"
+      "todayPrice": 35,
+      "yesterdayPrice": 33
     },
     {
       "id": 2,
       "name": "Aluminium Scrap",
       "category": "Metal",
-      "price": 145,
       "unit": "kg",
-      "trend": "up"
+      "todayPrice": 145,
+      "yesterdayPrice": 140
     },
     {
       "id": 3,
       "name": "Copper Scrap",
       "category": "Metal",
-      "price": 680,
       "unit": "kg",
-      "trend": "up"
+      "todayPrice": 680,
+      "yesterdayPrice": 665
     },
     {
       "id": 4,
       "name": "Brass Scrap",
       "category": "Metal",
-      "price": 423,
       "unit": "kg",
-      "trend": "down"
+      "todayPrice": 423,
+      "yesterdayPrice": 435
     },
     {
       "id": 5,
       "name": "Stainless Steel",
       "category": "Metal",
-      "price": 95,
       "unit": "kg",
-      "trend": "stable"
+      "todayPrice": 95,
+      "yesterdayPrice": 95
     },
     {
       "id": 6,
-      "name": "Newspaper",
-      "category": "Paper",
-      "price": 14,
+      "name": "Copper Wire (Household)",
+      "category": "Metal",
       "unit": "kg",
-      "trend": "stable"
+      "todayPrice": 510,
+      "yesterdayPrice": 505
     },
     {
       "id": 7,
-      "name": "Cardboard",
-      "category": "Paper",
-      "price": 10,
+      "name": "Tin / Steel Cans",
+      "category": "Metal",
       "unit": "kg",
-      "trend": "stable"
+      "todayPrice": 26,
+      "yesterdayPrice": 27
     },
     {
       "id": 8,
+      "name": "Newspaper",
+      "category": "Paper",
+      "unit": "kg",
+      "todayPrice": 14,
+      "yesterdayPrice": 14
+    },
+    {
+      "id": 9,
+      "name": "Cardboard",
+      "category": "Paper",
+      "unit": "kg",
+      "todayPrice": 10,
+      "yesterdayPrice": 10
+    },
+    {
+      "id": 10,
+      "name": "Office White Paper",
+      "category": "Paper",
+      "unit": "kg",
+      "todayPrice": 16,
+      "yesterdayPrice": 15
+    },
+    {
+      "id": 11,
+      "name": "Books & Magazines",
+      "category": "Paper",
+      "unit": "kg",
+      "todayPrice": 12,
+      "yesterdayPrice": 12
+    },
+    {
+      "id": 12,
       "name": "PET Plastic",
       "category": "Plastic",
-      "price": 22,
       "unit": "kg",
-      "trend": "up"
+      "todayPrice": 22,
+      "yesterdayPrice": 20
+    },
+    {
+      "id": 13,
+      "name": "Hard Plastic (Mixed)",
+      "category": "Plastic",
+      "unit": "kg",
+      "todayPrice": 18,
+      "yesterdayPrice": 18
+    },
+    {
+      "id": 14,
+      "name": "Plastic Bottles (Mixed)",
+      "category": "Plastic",
+      "unit": "kg",
+      "todayPrice": 12,
+      "yesterdayPrice": 13
+    },
+    {
+      "id": 15,
+      "name": "Milk Pouches (LDPE)",
+      "category": "Plastic",
+      "unit": "kg",
+      "todayPrice": 20,
+      "yesterdayPrice": 19
+    },
+    {
+      "id": 16,
+      "name": "Old Laptop",
+      "category": "E-Waste",
+      "unit": "piece",
+      "todayPrice": 900,
+      "yesterdayPrice": 850
+    },
+    {
+      "id": 17,
+      "name": "Desktop CPU Cabinet",
+      "category": "E-Waste",
+      "unit": "piece",
+      "todayPrice": 520,
+      "yesterdayPrice": 520
+    },
+    {
+      "id": 18,
+      "name": "LCD Monitor",
+      "category": "E-Waste",
+      "unit": "piece",
+      "todayPrice": 260,
+      "yesterdayPrice": 250
+    },
+    {
+      "id": 19,
+      "name": "Mobile Phone (Scrap)",
+      "category": "E-Waste",
+      "unit": "piece",
+      "todayPrice": 120,
+      "yesterdayPrice": 135
+    },
+    {
+      "id": 20,
+      "name": "Computer Motherboard",
+      "category": "E-Waste",
+      "unit": "kg",
+      "todayPrice": 320,
+      "yesterdayPrice": 310
     }
   ]
 }

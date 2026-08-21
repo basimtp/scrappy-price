@@ -1,0 +1,933 @@
+/* ============================================================================
+   SCRAPPY PRICE — STYLESHEET
+   ----------------------------------------------------------------------------
+   HOW TO USE THIS FILE
+   Everything visual lives here. If you only want to change colours or sizes,
+   edit the "DESIGN TOKENS" block below and nothing else — every card, button
+   and heading on the site reads its colour from there.
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. DESIGN TOKENS  ← change colours and spacing here
+   ============================================================================ */
+:root {
+
+  /* --- Brand green (sustainability palette) ------------------------------ */
+  --brand-950: #042413;
+  --brand-900: #052E1B;
+  --brand-800: #0A4D2E;
+  --brand-700: #0F6B3D;
+  --brand-600: #168C4C;   /* core brand green */
+  --brand-500: #1FA75C;
+  --brand-400: #4CC17F;
+  --brand-100: #DCF5E7;
+  --brand-50:  #F2FBF6;
+
+  /* --- Price movement colours -------------------------------------------- */
+  /* Kept visually separate from the brand green so "green page" is never
+     confused with "price went up". Every indicator also has an arrow and a
+     text label, so colour is never the only clue.                          */
+  --up:        #047857;
+  --up-soft:   #E6F4EE;
+  --down:      #C81E1E;
+  --down-soft: #FDECEC;
+  --flat:      #55666E;
+  --flat-soft: #EDF1F3;
+
+  /* --- Neutrals ---------------------------------------------------------- */
+  --ink:     #0B1F17;   /* main text */
+  --ink-2:   #40544B;   /* secondary text */
+  --ink-3:   #6E827A;   /* muted text */
+  --line:    #E2EDE7;   /* borders */
+  --surface: #FFFFFF;   /* card background */
+  --bg:      #F5FAF7;   /* page background */
+
+  /* --- WhatsApp brand green (do not use for prices) ---------------------- */
+  --wa:      #1FA855;
+  --wa-dark: #15803D;
+
+  /* --- Type -------------------------------------------------------------- */
+  --font-display: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+               Roboto, Helvetica, Arial, sans-serif;
+
+  /* --- Spacing (4px scale) ----------------------------------------------- */
+  --s1: 4px;   --s2: 8px;   --s3: 12px;  --s4: 16px;
+  --s5: 20px;  --s6: 24px;  --s8: 32px;  --s10: 40px;
+  --s12: 48px; --s16: 64px; --s20: 80px;
+
+  /* --- Rounded corners --------------------------------------------------- */
+  --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 24px; --r-full: 999px;
+
+  /* --- Shadows ----------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(6, 40, 25, .05), 0 1px 3px rgba(6, 40, 25, .04);
+  --shadow-md: 0 4px 10px -2px rgba(6, 40, 25, .08), 0 2px 5px -3px rgba(6, 40, 25, .06);
+  --shadow-lg: 0 18px 34px -14px rgba(6, 40, 25, .18), 0 6px 12px -6px rgba(6, 40, 25, .09);
+
+  /* --- Layout ------------------------------------------------------------ */
+  --wrap: 1200px;
+  --header-h: 60px;
+}
+
+
+/* ============================================================================
+   2. BASE / RESET
+   ============================================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + var(--s4));
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+a { color: var(--brand-700); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img, svg { max-width: 100%; }
+ul { list-style: none; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; }
+
+/* Anything the page hides must stay hidden.
+   Needed because rules like ".price-grid { display: grid }" would otherwise
+   override the browser's built-in [hidden] behaviour. */
+[hidden] { display: none !important; }
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 3px solid var(--brand-500);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+
+/* ============================================================================
+   3. SHARED UTILITIES
+   ============================================================================ */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--s4);
+}
+
+/* Hidden on screen, still read by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -60px; left: var(--s4);
+  z-index: 200;
+  padding: var(--s3) var(--s5);
+  background: var(--surface);
+  color: var(--brand-800);
+  font-weight: 600;
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  transition: top .2s ease;
+}
+.skip-link:focus { top: var(--s3); text-decoration: none; }
+
+.ico { width: 16px; height: 16px; flex: none; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: 44px;
+  padding: 0 var(--s5);
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: var(--r-full);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn:hover { text-decoration: none; }
+.btn:active { transform: scale(.97); }
+
+.btn-ghost {
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  color: var(--brand-800);
+}
+.btn-ghost:hover { border-color: var(--brand-400); background: var(--brand-50); }
+
+
+/* ============================================================================
+   4. HEADER
+   ============================================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: var(--brand-950);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+}
+
+.brand { display: flex; align-items: center; gap: var(--s3); }
+.brand:hover { text-decoration: none; }
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  flex: none;
+  color: #fff;
+  background: linear-gradient(140deg, var(--brand-500), var(--brand-700));
+  border-radius: 11px;
+  box-shadow: 0 2px 10px rgba(31, 167, 92, .35);
+}
+.brand-mark svg { width: 20px; height: 20px; }
+
+.brand-text {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: .10em;
+  line-height: 1.1;
+  color: #fff;
+  white-space: nowrap;
+}
+.brand-text span { font-weight: 600; color: var(--brand-400); }
+
+.header-meta { display: flex; align-items: center; gap: var(--s3); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: var(--s2) var(--s3);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--brand-100);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .10);
+  border-radius: var(--r-full);
+  white-space: nowrap;
+}
+
+.btn-header-wa {
+  min-height: 38px;
+  padding: 0 var(--s4);
+  font-size: 14px;
+  color: #fff;
+  background: var(--wa);
+}
+.btn-header-wa:hover { background: var(--wa-dark); }
+
+
+/* ============================================================================
+   5. HERO + LAST UPDATED
+   ============================================================================ */
+.hero {
+  position: relative;
+  padding: var(--s10) 0 var(--s20);
+  color: #fff;
+  background:
+    radial-gradient(120% 120% at 12% 0%, rgba(31, 167, 92, .34) 0%, transparent 55%),
+    linear-gradient(165deg, var(--brand-900) 0%, var(--brand-800) 55%, var(--brand-700) 100%);
+}
+
+/* Soft fade into the page background */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+
+.hero-inner { display: grid; gap: var(--s6); }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-bottom: var(--s4);
+  padding: var(--s2) var(--s4);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--brand-100);
+  background: rgba(255, 255, 255, .09);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: var(--r-full);
+}
+
+/* Small "live" dot */
+.pulse {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--brand-400);
+  box-shadow: 0 0 0 0 rgba(76, 193, 127, .8);
+  animation: pulse 2.2s infinite;
+}
+@keyframes pulse {
+  70%  { box-shadow: 0 0 0 9px rgba(76, 193, 127, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(76, 193, 127, 0); }
+}
+
+.hero h1 {
+  font-size: clamp(30px, 7vw, 50px);
+  font-weight: 800;
+  color: #fff;
+}
+
+.hero-copy p {
+  max-width: 52ch;
+  margin-top: var(--s4);
+  font-size: clamp(15px, 3.6vw, 17.5px);
+  color: rgba(226, 244, 234, .84);
+}
+
+/* --- Last Updated card (Requirement 13) --------------------------------- */
+.updated-card {
+  display: grid;
+  gap: var(--s2);
+  padding: var(--s6);
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: var(--r-xl);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.updated-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--brand-400);
+}
+
+.updated-date {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 5.5vw, 29px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.updated-badge {
+  justify-self: start;
+  padding: var(--s1) var(--s3);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-900);
+  background: var(--brand-400);
+  border-radius: var(--r-full);
+}
+
+.updated-foot {
+  margin-top: var(--s1);
+  font-size: 13px;
+  color: rgba(226, 244, 234, .75);
+}
+
+
+/* ============================================================================
+   6. MARKET SUMMARY TILES
+   ============================================================================ */
+.stats {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s3);
+  margin-top: calc(var(--s12) * -1);
+}
+
+.stat {
+  padding: var(--s4);
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  color: var(--brand-700);
+}
+
+.stat-label {
+  display: block;
+  margin-top: var(--s1);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.stat-up   .stat-num { color: var(--up); }
+.stat-down .stat-num { color: var(--down); }
+.stat-flat .stat-num { color: var(--flat); }
+
+
+/* ============================================================================
+   7. TOOLBAR — SEARCH, FILTERS, SORT
+   ============================================================================ */
+.toolbar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 90;
+  display: grid;
+  gap: var(--s3);
+  margin-top: var(--s8);
+  padding: var(--s3) 0;
+  background: rgba(245, 250, 247, .90);   /* = --bg, slightly see-through */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* --- Search ------------------------------------------------------------- */
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-ico {
+  position: absolute;
+  left: var(--s4);
+  width: 19px; height: 19px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+
+.search input {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 46px 0 46px;
+  font-size: 15.5px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-full);
+  box-shadow: var(--shadow-sm);
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.search input::placeholder { color: var(--ink-3); }
+.search input:focus {
+  outline: none;
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 4px rgba(31, 167, 92, .16);
+}
+/* Hide the browser's own search "x" so we can use our own */
+.search input::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+.search-clear {
+  position: absolute;
+  right: var(--s2);
+  display: grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  color: var(--ink-2);
+  border-radius: 50%;
+}
+.search-clear svg { width: 17px; height: 17px; }
+.search-clear:hover { background: var(--brand-50); color: var(--ink); }
+
+/* --- Filters + sort row -------------------------------------------------- */
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.filters {
+  display: flex;
+  gap: var(--s2);
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.filters::-webkit-scrollbar { display: none; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 42px;
+  padding: 0 var(--s4);
+  font-size: 14.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-full);
+  transition: all .18s ease;
+}
+.pill:hover { border-color: var(--brand-400); color: var(--brand-800); }
+
+.pill[aria-pressed="true"] {
+  color: #fff;
+  background: var(--brand-700);
+  border-color: var(--brand-700);
+  box-shadow: var(--shadow-md);
+}
+
+.pill-count {
+  padding: 1px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+  background: var(--brand-50);
+  border-radius: var(--r-full);
+}
+.pill[aria-pressed="true"] .pill-count {
+  color: #fff;
+  background: rgba(255, 255, 255, .22);
+}
+
+.sort select {
+  min-height: 42px;
+  max-width: 190px;
+  padding: 0 var(--s3);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-full);
+  cursor: pointer;
+}
+.sort select:focus { outline: none; border-color: var(--brand-500); }
+
+.result-count {
+  margin: var(--s4) 0 var(--s4);
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.result-count strong { color: var(--ink); font-weight: 600; }
+
+
+/* ============================================================================
+   8. PRICE CARDS
+   ============================================================================ */
+.price-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s4);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--s5) var(--s5) var(--s4) calc(var(--s5) + 4px);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* Coloured accent bar down the left edge, tinted by price movement */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--flat);
+}
+.card.is-up::before   { background: linear-gradient(var(--brand-500), var(--up)); }
+.card.is-down::before { background: linear-gradient(#EF4444, var(--down)); }
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand-400);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s3);
+}
+
+.badge {
+  padding: var(--s1) var(--s3);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--brand-800);
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  border-radius: var(--r-full);
+  white-space: nowrap;
+}
+
+/* --- UP / DOWN / NO CHANGE pill (Requirements 9 & 10) ------------------- */
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  padding: var(--s1) var(--s3);
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border-radius: var(--r-full);
+  white-space: nowrap;
+}
+.trend-arrow { font-size: 11px; line-height: 1; }
+
+.is-up   .trend { color: var(--up);   background: var(--up-soft); }
+.is-down .trend { color: var(--down); background: var(--down-soft); }
+.is-flat .trend { color: var(--flat); background: var(--flat-soft); }
+
+.card-name {
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.card-price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  margin: var(--s3) 0 var(--s4);
+}
+
+.price-value {
+  font-family: var(--font-display);
+  font-size: 33px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+  line-height: 1;
+  color: var(--brand-700);
+}
+
+.price-unit {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/* --- Yesterday vs change row (Requirement 8) ---------------------------- */
+.card-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s3);
+  margin-top: auto;
+  padding-top: var(--s3);
+  border-top: 1px dashed var(--line);
+}
+
+.compare-cell { display: grid; gap: 2px; }
+.compare-cell + .compare-cell { text-align: right; }
+
+.compare-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.compare-value {
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+.is-up   .compare-change { color: var(--up); }
+.is-down .compare-change { color: var(--down); }
+.is-flat .compare-change { color: var(--flat); }
+
+.status-word {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+
+/* ============================================================================
+   9. LOADING / ERROR / EMPTY STATES
+   ============================================================================ */
+.skeleton {
+  height: 186px;
+  background: linear-gradient(100deg, #EDF5F0 30%, #F7FBF9 50%, #EDF5F0 70%);
+  background-size: 220% 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  animation: shimmer 1.4s infinite linear;
+}
+@keyframes shimmer {
+  from { background-position: 180% 0; }
+  to   { background-position: -60% 0; }
+}
+
+.notice {
+  padding: var(--s10) var(--s5);
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+}
+.notice h2 { font-size: 20px; margin-bottom: var(--s2); }
+.notice p {
+  max-width: 46ch;
+  margin: 0 auto var(--s5);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+.notice p:last-child { margin-bottom: 0; }
+.notice-ico { display: block; font-size: 34px; margin-bottom: var(--s3); }
+
+.notice-error {
+  border-color: #F5CFCF;
+  background: var(--down-soft);
+}
+.notice-error h2 { color: #8F1A1A; }
+.notice-error p { color: #7A2020; }
+
+
+/* ============================================================================
+   10. DISCLAIMER  (Requirement 14)
+   ============================================================================ */
+.disclaimer {
+  display: flex;
+  gap: var(--s4);
+  margin: var(--s12) 0 var(--s16);
+  padding: var(--s5);
+  background: linear-gradient(180deg, #FFFDF5, #FFFBEB);
+  border: 1px solid #FDE9A9;
+  border-left: 4px solid #E9A700;
+  border-radius: var(--r-lg);
+}
+
+.disclaimer-ico { flex: none; color: #B57F00; }
+.disclaimer-ico svg { width: 24px; height: 24px; }
+
+.disclaimer h2 {
+  font-size: 16.5px;
+  margin-bottom: var(--s2);
+  color: #6B4E00;
+}
+.disclaimer p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #6B5514;
+}
+.disclaimer strong { color: #4F3D00; }
+
+
+/* ============================================================================
+   11. FOOTER
+   ============================================================================ */
+.site-footer {
+  padding-top: var(--s12);
+  color: rgba(226, 244, 234, .74);
+  background: var(--brand-950);
+}
+
+.footer-inner {
+  display: grid;
+  gap: var(--s8);
+  padding-bottom: var(--s10);
+}
+
+.footer-wordmark { font-size: 16px; }
+.footer-brand p {
+  max-width: 42ch;
+  margin-top: var(--s3);
+  font-size: 14.5px;
+}
+
+.footer-col h3 {
+  margin-bottom: var(--s3);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--brand-400);
+}
+.footer-col li { padding: var(--s1) 0; font-size: 14.5px; }
+.footer-col a { color: #fff; }
+.footer-col a:hover { color: var(--brand-400); }
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s2);
+  padding-top: var(--s5);
+  padding-bottom: calc(var(--s6) + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(255, 255, 255, .09);
+  font-size: 13px;
+}
+.footer-note { color: rgba(226, 244, 234, .55); }
+
+
+/* ============================================================================
+   12. FLOATING WHATSAPP BUTTON  (Requirement 15)
+   ============================================================================ */
+.wa-float {
+  position: fixed;
+  right: var(--s4);
+  bottom: calc(var(--s4) + env(safe-area-inset-bottom));
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  height: 54px;
+  padding: 0 var(--s5);
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  background: var(--wa);
+  border-radius: var(--r-full);
+  box-shadow: 0 10px 26px -6px rgba(21, 128, 61, .55), 0 3px 8px rgba(6, 40, 25, .18);
+  transition: transform .18s ease, background .18s ease;
+}
+.wa-float svg { width: 24px; height: 24px; flex: none; }
+.wa-float:hover {
+  background: var(--wa-dark);
+  transform: translateY(-2px) scale(1.02);
+  text-decoration: none;
+}
+.wa-float:active { transform: scale(.97); }
+
+/* Label is hidden on the smallest screens to save room */
+.wa-float-label { display: none; }
+
+
+/* ============================================================================
+   13. RESPONSIVE  (Requirement 12) — mobile first, then wider screens
+   ============================================================================ */
+
+/* --- Large phones ------------------------------------------------------- */
+@media (min-width: 480px) {
+  .price-grid { grid-template-columns: repeat(auto-fill, minmax(258px, 1fr)); }
+  .wa-float-label { display: inline; }
+}
+
+/* --- Tablets ------------------------------------------------------------ */
+@media (min-width: 768px) {
+  :root { --header-h: 68px; }
+
+  .wrap { padding-inline: var(--s6); }
+
+  .hero { padding: var(--s16) 0 var(--s20); }
+  .hero-inner {
+    grid-template-columns: 1.35fr .85fr;
+    align-items: center;
+    gap: var(--s10);
+  }
+
+  .stats { grid-template-columns: repeat(4, 1fr); gap: var(--s4); }
+  .stat { padding: var(--s5); }
+  .stat-num { font-size: 30px; }
+
+  .toolbar { grid-template-columns: minmax(240px, 340px) 1fr; align-items: center; }
+  .toolbar-row { justify-content: flex-end; }
+
+  .footer-inner { grid-template-columns: 1.6fr 1fr 1fr; }
+  .disclaimer { padding: var(--s6) var(--s8); }
+}
+
+/* --- Small laptops ------------------------------------------------------ */
+@media (min-width: 1024px) {
+  .card { padding: var(--s6) var(--s6) var(--s5) calc(var(--s6) + 4px); }
+  .price-value { font-size: 35px; }
+  .price-grid { gap: var(--s5); }
+}
+
+/* --- Large desktops: cap at 4 columns ----------------------------------- */
+@media (min-width: 1280px) {
+  .price-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* --- Hide the header WhatsApp button on narrow screens ------------------ */
+@media (max-width: 599px) {
+  .btn-header-wa span { display: none; }
+  .btn-header-wa { padding: 0; width: 38px; }
+  .chip-location { font-size: 12px; }
+}
+@media (max-width: 400px) {
+  .chip-location span { display: none; }
+}
+
+
+/* ============================================================================
+   14. ACCESSIBILITY & PRINT
+   ============================================================================ */
+
+/* Respect the visitor's "reduce motion" setting */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .card:hover, .wa-float:hover { transform: none; }
+}
+
+@media print {
+  .site-header, .toolbar, .wa-float, .hero::after, .skip-link { display: none !important; }
+  body { background: #fff; }
+  .hero, .site-footer { background: #fff !important; color: #000 !important; }
+  .hero h1, .updated-date, .updated-label, .footer-col h3 { color: #000 !important; }
+  .card { break-inside: avoid; box-shadow: none; }
+  .price-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}

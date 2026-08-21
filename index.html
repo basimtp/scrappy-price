@@ -2,180 +2,296 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <title>Scrappy | Daily Scrap Prices</title>
+  <title>Scrappy Price | Daily Scrap Rates in Kerala, India</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+  <!-- ============================================================
+       SEO / SOCIAL SHARING
+       Change the text below if your business details change.
+       ============================================================ -->
+  <meta name="description"
+        content="Live daily scrap material prices in Kerala, India. Compare today's and yesterday's rates for metal, paper, plastic and e-waste scrap with Scrappy Innovations.">
+  <meta name="theme-color" content="#0A4D2E">
+  <meta name="author" content="Scrappy Innovations">
 
-    body {
-      background: #f4f7f5;
-      color: #222;
-    }
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Scrappy Price | Daily Scrap Rates in Kerala, India">
+  <meta property="og:description"
+        content="Today's scrap rates for metal, paper, plastic and e-waste — updated daily by Scrappy Innovations.">
+  <!-- If you move to a custom domain, update this one line (see README.md) -->
+  <meta property="og:url" content="https://basimtp.github.io/scrappy-price/">
+  <meta name="twitter:card" content="summary">
 
-    header {
-      background: #168c4c;
-      color: white;
-      text-align: center;
-      padding: 45px 20px;
-    }
+  <!-- Favicon is drawn inline, so there is no extra file to upload -->
+  <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23168C4C'/%3E%3Cpath d='M16 6c-6 4.5-9 8.5-9 12.5a9 9 0 0 0 18 0C25 14.5 22 10.5 16 6z' fill='%23ffffff'/%3E%3C/svg%3E">
 
-    header h1 {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
+  <!-- Fonts (optional: the site still looks correct if these fail to load) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    .info-box {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-    }
-
-    .price-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .category {
-      color: #777;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .price {
-      font-size: 32px;
-      font-weight: bold;
-      color: #168c4c;
-      margin: 15px 0;
-    }
-
-    .up {
-      color: green;
-    }
-
-    .down {
-      color: red;
-    }
-
-    .stable {
-      color: gray;
-    }
-
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 25px;
-      margin-top: 40px;
-    }
-  </style>
+  <!-- Our own styles. Relative path — required for GitHub Pages project sites. -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<header>
-  <h1>♻ SCRAPPY</h1>
-  <p>Daily Scrap Market Prices</p>
+<a class="skip-link" href="#prices">Skip to prices</a>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+
+    <a class="brand" href="./" aria-label="Scrappy Price home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 19H4.8a2 2 0 0 1-1.7-3l1.9-3.2"></path>
+          <path d="M11 19h6.2a2 2 0 0 0 1.7-3l-1-1.7"></path>
+          <path d="M14.4 5.6 13.3 3.7a2 2 0 0 0-3.4 0L8.2 6.6"></path>
+          <path d="m5 12 2-3.5 3.5 2"></path>
+          <path d="m19 15-3.5-2 2-3.5"></path>
+          <path d="m9 19 2.5-2.5L9 14"></path>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <strong>SCRAPPY</strong>
+        <span>PRICE</span>
+      </span>
+    </a>
+
+    <div class="header-meta">
+      <span class="chip chip-location">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span id="locationText">Kerala, India</span>
+      </span>
+
+      <a class="btn btn-header-wa" id="waHeader" href="#" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.02.07-1.76-.11-.44-.1-1.02-.3-1.76-.62-3.09-1.33-5.11-4.44-5.27-4.65-.15-.21-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.39.82-.39.2 0 .41 0 .59.01.19.01.44-.07.69.53.24.6.83 2.02.9 2.17.07.15.12.32.02.53-.1.21-.15.34-.3.52-.15.18-.32.4-.46.54-.15.15-.31.31-.13.61.18.3.79 1.31 1.7 2.12 1.17 1.04 2.15 1.37 2.45 1.52.3.15.48.13.66-.08.18-.21.76-.89.96-1.19.2-.3.4-.25.68-.15.28.1 1.77.84 2.07.99.3.15.5.23.58.36.07.13.07.76-.17 1.44Z"/>
+        </svg>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+
+  </div>
 </header>
 
-<div class="container">
+<!-- ============================================================
+     HERO + LAST UPDATED
+     ============================================================ -->
+<section class="hero">
+  <div class="wrap hero-inner">
 
-  <div class="info-box">
-    <h2>Today's Scrap Prices</h2>
-    <br>
-    <p>📍 Location: <span id="location"></span></p>
-    <br>
-    <p>📅 Last Updated: <span id="lastUpdated"></span></p>
+    <div class="hero-copy">
+      <span class="eyebrow">
+        <span class="pulse" aria-hidden="true"></span>
+        Live scrap market rates
+      </span>
+      <h1>Today&rsquo;s Scrap Prices</h1>
+      <p>
+        Transparent, up-to-date rates for metal, paper, plastic and e-waste scrap.
+        Know what your material is worth before you sell.
+      </p>
+    </div>
+
+    <div class="updated-card">
+      <span class="updated-label">Last Updated</span>
+      <strong class="updated-date" id="lastUpdatedDate">&mdash;</strong>
+      <span class="updated-badge" id="lastUpdatedRelative">Loading&hellip;</span>
+      <span class="updated-foot" id="currencyNote">All rates in Indian Rupees (&#8377;)</span>
+    </div>
+
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- ============================================================
+       MARKET SUMMARY
+       ============================================================ -->
+  <section class="stats" aria-label="Market summary">
+    <div class="stat">
+      <span class="stat-num" id="statTotal">&mdash;</span>
+      <span class="stat-label">Materials tracked</span>
+    </div>
+    <div class="stat stat-up">
+      <span class="stat-num" id="statUp">&mdash;</span>
+      <span class="stat-label">Prices up</span>
+    </div>
+    <div class="stat stat-down">
+      <span class="stat-num" id="statDown">&mdash;</span>
+      <span class="stat-label">Prices down</span>
+    </div>
+    <div class="stat stat-flat">
+      <span class="stat-num" id="statFlat">&mdash;</span>
+      <span class="stat-label">No change</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SEARCH + FILTERS + SORT
+       ============================================================ -->
+  <section class="toolbar" id="prices" aria-label="Search and filter materials">
+
+    <div class="search">
+      <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-3.5-3.5"></path>
+      </svg>
+      <label class="sr-only" for="searchInput">Search scrap materials</label>
+      <input id="searchInput" type="search" autocomplete="off"
+             placeholder="Search a material, e.g. copper, laptop&hellip;">
+      <button id="clearSearch" class="search-clear" type="button" hidden aria-label="Clear search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="toolbar-row">
+      <!-- Filter buttons are created automatically from the categories in prices.json -->
+      <div class="filters" id="filterPills" role="group" aria-label="Filter by category"></div>
+
+      <div class="sort">
+        <label class="sr-only" for="sortSelect">Sort materials</label>
+        <select id="sortSelect">
+          <option value="featured">Sort: Featured</option>
+          <option value="name">Name (A&ndash;Z)</option>
+          <option value="high">Price: High to Low</option>
+          <option value="low">Price: Low to High</option>
+          <option value="movers">Biggest movers</option>
+        </select>
+      </div>
+    </div>
+
+  </section>
+
+  <p class="result-count" id="resultCount" role="status" aria-live="polite"></p>
+
+  <!-- ============================================================
+       PRICE CARDS  (filled in by app.js)
+       ============================================================ -->
+  <section id="priceGrid" class="price-grid" aria-label="Scrap prices"></section>
+
+  <!-- Shown only while prices.json is loading -->
+  <div id="loadingState" class="price-grid" aria-hidden="true">
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
   </div>
 
-  <div id="priceContainer" class="price-grid"></div>
+  <!-- Shown only if prices.json cannot be loaded -->
+  <div id="errorState" class="notice notice-error" hidden>
+    <h2>We couldn&rsquo;t load today&rsquo;s prices</h2>
+    <p id="errorDetail"></p>
+  </div>
 
-</div>
+  <!-- Shown only when a search or filter matches nothing -->
+  <div id="emptyState" class="notice notice-empty" hidden>
+    <span class="notice-ico" aria-hidden="true">&#128230;</span>
+    <h2>No materials found</h2>
+    <p>Try a different spelling, or clear the filters to see every rate.</p>
+    <button class="btn btn-ghost" type="button" id="resetFilters">Show all materials</button>
+  </div>
 
-<footer>
-  <p>© 2026 Scrappy Innovations. All Rights Reserved.</p>
+  <!-- ============================================================
+       DISCLAIMER
+       ============================================================ -->
+  <aside class="disclaimer">
+    <span class="disclaimer-ico" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 16v-5M12 8h.01"></path>
+      </svg>
+    </span>
+    <div>
+      <h2>Please note &mdash; rates are indicative</h2>
+      <p>
+        The prices listed here are guide rates for the location shown above.
+        <strong>Final rates may vary based on the quality, quantity and location</strong>
+        of your material, as well as day-to-day market movement, moisture, contamination
+        and sorting effort. Please contact us to confirm an exact rate before selling.
+      </p>
+    </div>
+  </aside>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+
+    <div class="footer-brand">
+      <span class="brand-text footer-wordmark">
+        <strong>SCRAPPY</strong> <span>INNOVATIONS</span>
+      </span>
+      <p>
+        Building a cleaner India by making scrap recycling simple,
+        fair and transparent for every household and business.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h3>What we buy</h3>
+      <ul>
+        <li>Metal scrap</li>
+        <li>Paper &amp; cardboard</li>
+        <li>Plastic waste</li>
+        <li>E-waste &amp; appliances</li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>Get in touch</h3>
+      <ul>
+        <li><a id="waFooter" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></li>
+        <li>Serving <span class="footer-location">Kerala, India</span></li>
+        <li>Rates updated daily</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="wrap footer-bottom">
+    <p>&copy; <span id="year">2026</span> Scrappy Innovations. All Rights Reserved.</p>
+    <p class="footer-note">
+      Rates shown are indicative and may vary by quality, quantity and location.
+    </p>
+  </div>
 </footer>
 
-<script>
+<!-- ============================================================
+     FLOATING WHATSAPP BUTTON
+     The phone number lives in app.js under CONFIG.
+     ============================================================ -->
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener"
+   aria-label="Contact Scrappy Innovations on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.4 1.3-1.93 1.35-.53.05-1.02.07-1.76-.11-.44-.1-1.02-.3-1.76-.62-3.09-1.33-5.11-4.44-5.27-4.65-.15-.21-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.39.82-.39.2 0 .41 0 .59.01.19.01.44-.07.69.53.24.6.83 2.02.9 2.17.07.15.12.32.02.53-.1.21-.15.34-.3.52-.15.18-.32.4-.46.54-.15.15-.31.31-.13.61.18.3.79 1.31 1.7 2.12 1.17 1.04 2.15 1.37 2.45 1.52.3.15.48.13.66-.08.18-.21.76-.89.96-1.19.2-.3.4-.25.68-.15.28.1 1.77.84 2.07.99.3.15.5.23.58.36.07.13.07.76-.17 1.44Z"/>
+  </svg>
+  <span class="wa-float-label">Sell your scrap</span>
+</a>
 
-fetch('./prices.json')
-  .then(response => response.json())
-  .then(data => {
-
-    document.getElementById('location').textContent = data.location;
-
-    document.getElementById('lastUpdated').textContent = data.lastUpdated;
-
-    const container = document.getElementById('priceContainer');
-
-    data.prices.forEach(item => {
-
-      let icon = '➖';
-
-      if (item.trend === 'up') {
-        icon = '📈';
-      } 
-      else if (item.trend === 'down') {
-        icon = '📉';
-      }
-
-      container.innerHTML += `
-        <div class="card">
-
-          <div class="category">
-            ${item.category}
-          </div>
-
-          <h3>${item.name}</h3>
-
-          <div class="price">
-            ₹${item.price}
-            <span style="font-size:14px;font-weight:normal;">
-              / ${item.unit}
-            </span>
-          </div>
-
-          <div class="${item.trend}">
-            ${icon} ${item.trend.toUpperCase()}
-          </div>
-
-        </div>
-      `;
-    });
-
-  })
-  .catch(error => {
-    console.error('Error loading prices:', error);
-  });
-
-</script>
+<!-- Our logic. Relative path — required for GitHub Pages project sites. -->
+<script src="app.js"></script>
 
 </body>
 </html>
